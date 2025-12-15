@@ -3,15 +3,15 @@
 There are 4 packages that need to be "installed" in order to use the Turtlebot4's with `resource_management` and `webui`.
 This has only been tested with ROS2 Humble and Ubuntu 22.04 LTS.
 
-1. `tb4_status`: [Link to repository](https://github.com/bmanara/tb4_status)
+1. `tb4_status`: [Link to repository](https://gitlab.com/tb4_artc/tb4_status)
     - Translates task instructions obtained from `tb_fleet_server` to Nav2 and AMCL instructions
     - Sends robot and task status to `tb_fleet_server`
-2. `my_tb4_nav`: [Link to repository](https://github.com/bmanara/my_tb4_nav)
+2. `my_tb4_nav`: [Link to repository](https://gitlab.com/tb4_artc/my_tb4_nav)
     - Responsible for launching Nav2 and AMCL lifecycles with custom config files
-3. `tb_fleet_server`: [Link to repository](https://github.com/bmanara/tb_fleet_server)
+3. `tb_fleet_server`: [Link to repository](https://gitlab.com/tb4_artc/tb_fleet_server)
     - Receive tasks from `fleet_server` and passes down to correct robot.
     - Sends robot and task status to `fleet_server` after receiving from robot
-4. `tb4_status_interface`: [Link to repository](https://github.com/bmanara/tb4_status_interface)
+4. `tb4_status_interface`: [Link to repository](https://gitlab.com/tb4_artc/tb4_status_interface)
     - Responsible for defining custom message, enabling communication between ROS2 nodes in `tb4_status`
 
 ## High Level Diagram

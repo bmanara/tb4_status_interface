@@ -4,9 +4,19 @@ There are 4 packages that need to be "installed" in order to use the Turtlebot4'
 This has only been tested with ROS2 Humble and Ubuntu 22.04 LTS.
 
 1. `tb4_status`: [Link to repository](https://github.com/bmanara/tb4_status)
+    - Translates task instructions obtained from `tb_fleet_server` to Nav2 and AMCL instructions
+    - Sends robot and task status to `tb_fleet_server`
 2. `my_tb4_nav`: [Link to repository](https://github.com/bmanara/my_tb4_nav)
+    - Responsible for launching Nav2 and AMCL lifecycles with custom config files
 3. `tb_fleet_server`: [Link to repository](https://github.com/bmanara/tb_fleet_server)
+    - Receive tasks from `fleet_server` and passes down to correct robot.
+    - Sends robot and task status to `fleet_server` after receiving from robot
 4. `tb4_status_interface`: [Link to repository](https://github.com/bmanara/tb4_status_interface)
+    - Responsible for defining custom message, enabling communication between ROS2 nodes in `tb4_status`
+
+## High Level Diagram
+
+![Middleware Diagram](examples/Middleware%20Diagram.png)
 
 ---
 
@@ -22,7 +32,7 @@ This should be setup in the Turtlebot4. _Highly recommend to go through [Turtleb
 1. Create a new workspace (or in an existing one).
 
 ```bash
-mkdir -r ~/turtlebot4_ws/src
+mkdir -p ~/turtlebot4_ws/src
 cd ~/turtlebot4_ws/src
 ```
 
@@ -33,7 +43,7 @@ git clone <link from GitLab>
 ```
 
 3. Update the following in the files/code.
-    - `MAP_FILE` variable in `tb4_status/tb4_api_node.py` needs to reference the .json file that has all the waypoints. Refer to `tb4_status` repo, under `examples/level5_full_map_updated.json` file for the format (exported from DB or I2R). _Note that I usually put the .json file in the workspace folder, since I run all programs here.
+    - `MAP_FILE` variable in `tb4_status/tb4_api_node.py` needs to reference the .json file that has all the waypoints. Refer to `tb4_status` repo, under `examples/level5_full_map_updated.json` file for the format (exported from DB or I2R). _Note that I usually put the .json file in the workspace folder, since I run all programs here._
     - `namespace` variable in `launch/single_robot.launch.py` needs to be changed to the namespace your Turtlebot4 is using. (e.g AUC1)
     - `self.ip_address` and `self.uri` in `tb4_status/tb4_ws_node.py` needs to be updated to the turtlebot's IP address and the `tb_fleet_server` IP address (eg. if running in your local workstation, put your workstation's IP address)
     - `DEFAULT_INITLAL_POSE_POSITION` in `tb4_status/tb4_api_node.py` needs to be set to preferred initial pose position for robot. You can find this position from RViz.
@@ -56,7 +66,7 @@ This should be setup in the Turtlebot4. _Highly recommend to go through [Turtleb
 1. Create a new workspace (or in an existing one).
 
 ```bash
-mkdir -r ~/turtlebot4_ws/src
+mkdir -p ~/turtlebot4_ws/src
 cd ~/turtlebot4_ws/src
 ```
 
@@ -101,7 +111,7 @@ This should be setup in your Turtlebot4.
 1. Create a new workspace (or traverse to an existing one).
 
 ```bash
-mkdir -r ~/turtlebot4_ws/src
+mkdir -p ~/turtlebot4_ws/src
 cd ~/turtlebot4_ws/src
 ```
 
@@ -170,6 +180,9 @@ End state:
     2. Turtlebot4 updating `tb_fleet_server` about its status.
     3. Turtlebot4 able to receive tasks through `tb_fleet_server`.
 
+__Turtlebot4 Terminals End State__
+![End State Terminal](examples/End_State.jpg)
+
 ---
 
 ## Linking with `resource_management` and `webui`
@@ -204,12 +217,19 @@ Do update the above list if there are any new branches that are configured to wo
     - __Getting multiple LiDAR errors regarding timestamp__
         - Happens due to mismatch of datetime configuration between CPU and LiDAR
         - Solution: Connect to Create3 webpage for Turtlebot4 (http://<turtlebot_ip_address>:8000) -> Click on "Beta Features" -> "Restart ntpd" -> Wait for 30 seconds
+    - __Turtlebot4 5 LED Lights not up after startup complete__
+        - Solution: Power cycle Turtlebot4 (Wait for 3 minutes before powering on again)
+    - __Turtlebot4 circling around waypoint endlessly__
+        - Temporary Solution: Send pause and resume task through Postman (http://localhost:6000/auc/task)
+        - Send task in this format {"auc_id": "AUC1", "task_type": "pause"}
+        - Above is temporary, a more permanent fix would be to either improve navigation or create a more forgiving map
+        - Permanent Solution: Provide more waypoints and routes with less angled turns / increase frequency of controller/costmap updates.
 
 2. ROS2 Custom Packages Issues
     - __tb4_api_node, tb4_ws_node, Nav2 or AMCL failed to launch properly__
         - Ensure namespace defined properly
         - Launch the 3 launch files on the Turtlebot4 one by one, ensuring that each of them properly starts up before launching the others. Restart the launch if you have to.
-    - __fleet_server not talking to tb_fleet_server
+    - __fleet_server not talking to tb_fleet_server__
         - Solution: fleet_server originally uses https for security reasons. Change to http to talk to tb_fleet_server.
     - __Turtlebot Navigation failed in the middle of trajectory__
         - Solution: Restart the trajectory by using _pause_ and _resume_ endpoints (either through Debugging in `webui` or Postman)

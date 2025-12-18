@@ -64,7 +64,7 @@ git clone <link from GitLab>
 ```
 
 3. Update the following in the files/code.
-    - `MAP_FILE` variable in `tb4_status/tb4_api_node.py` needs to reference the .json file that has all the waypoints. Refer to `tb4_status` repo, under `examples/level5_full_map_updated.json` file for the format (exported from DB or I2R). _Note that I usually put the .json file in the workspace folder, since I run all programs here._
+    - `MAP_FILE` variable in `tb4_status/tb4_api_node.py` needs to reference the .json file that has all the waypoints. Refer to `tb4_status` repo, under `examples/level5_full_map_updated.json` file for the format (exported from DB or I2R).
     - `namespace` variable in `launch/single_robot.launch.py` needs to be changed to the namespace your Turtlebot4 is using. (e.g AUC1)
     - `self.ip_address` in `tb4_status/tb4_ws_node.py` needs to be updated to the turtlebot's IP address.
     - `self.uri` in `tb4_status/tb4_ws_node.py` needs to be updated to the `tb_fleet_server` IP address and port number. (e.g if running `tb_fleet_server` in your local workstation, put your workstation's IP address and port number of program)
@@ -126,6 +126,12 @@ cd ~/turtlebot4_ws/src
 
 ```bash
 git clone <link from GitLab>
+```
+
+3. Build the package
+
+```bash
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-select tb4_status_interface
 ```
 
 Setup complete.

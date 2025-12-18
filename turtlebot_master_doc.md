@@ -176,7 +176,7 @@ ros2 launch tb4_status single_robot.launch.py
 Second terminal, launch `my_tb4_nav` localization (AMCL) inside Turtlebot4.
 
 ```bash
-ros2 launch my_tb4_nav nav2.launch.py
+ros2 launch my_tb4_nav localization.launch.py map:=src/my_tb4_nav/examples/level5_full_map.yaml
 ```
 
 Third terminal, launch `my_tb4_nav` navigation stack (Nav2) inside Turtlebot4.

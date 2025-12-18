@@ -44,6 +44,8 @@ Before setting up the 3 packages, there are a few things to be done to the Turtl
 1. Follow [Basic Setup](https://turtlebot.github.io/turtlebot4-user-manual/setup/basic.html) from Turtlebot4 Official User Manual.
     - Ensure that you connect Turtlebot4 to the same network as local workstation (ARA)
     - Get network details/password from supervisor :)
+    - __Create a namespace for your Turtlebot using `turtlebot4-setup`__
+        - This namespace will be referenced in all the packages, so do ensure to properly do this as all ROS2 nodes and topics will be namespaced accordingly.
 2. Setup Turtlebot4 and Local workstation for __Discovery Server__ Network Configuration. Refer to [Discovery Server](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html) from Turtlebot4 Official User Manual.
 
 _After setting up the Turtlebot4 and Network configurations on workstation, you should be able to see the Turtlebot's topic in your workstation (might need to list more than once)_

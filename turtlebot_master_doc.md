@@ -243,9 +243,9 @@ python3 server_api.py
 All 5 programs should be up and running. If any fails, restart the launch sequence.
 
 End state:
-    1. Turtlebot4 will be localized and navigation stack up and running.
-    2. Turtlebot4 updating `tb_fleet_server` about its status.
-    3. Turtlebot4 able to receive tasks through `tb_fleet_server`.
+1. Turtlebot4 will be localized and navigation stack up and running.
+2. Turtlebot4 updating `tb_fleet_server` about its status.
+3. Turtlebot4 able to receive tasks through `tb_fleet_server`.
 
 __Turtlebot4 Terminals End State__
 ![End State Terminal](examples/End_State.jpg)

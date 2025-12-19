@@ -46,13 +46,20 @@ Before setting up the 3 packages, there are a few things to be done to the Turtl
     - Get network details/password from supervisor :)
     - __Create a namespace for your Turtlebot using `turtlebot4-setup`__
         - This namespace will be referenced in all the packages, so do ensure to properly do this as all ROS2 nodes and topics will be namespaced accordingly.
-2. Setup Turtlebot4 and Local workstation for __Discovery Server__ Network Configuration. Refer to [Discovery Server](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html) from Turtlebot4 Official User Manual.
 
-_After setting up the Turtlebot4 and Network configurations on workstation, you should be able to see the Turtlebot's topic in your workstation (might need to list more than once)_
+2. Setup Turtlebot4 and Local workstation for __Discovery Server__ Network Configuration. Refer to [Discovery Server](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html) from Turtlebot4 Official User Manual
+    - After setting up the Turtlebot4 and Network configurations on workstation, you should be able to see the Turtlebot's topic in your workstation (might need to list more than once)
 
 ```bash
 ros2 topic list
 ```
+
+3. (_Highly Recommended_) Follow Turtlebot4's Tutorials, specifically
+    - [Driving your Turtlebot4](https://turtlebot.github.io/turtlebot4-user-manual/tutorials/driving.html)
+    - [Generating a map](https://turtlebot.github.io/turtlebot4-user-manual/tutorials/generate_map.html)
+    - [Navigation](https://turtlebot.github.io/turtlebot4-user-manual/tutorials/navigation.html)
+    - The rest are useful too, but not needed if you have prior experience with ROS2
+    - After the tutorials, you should be able to map, navigate and localize your Turtlebot using RViz
 
 ### tb4_status
 

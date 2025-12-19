@@ -1,5 +1,23 @@
 # Master Document for using Turtlebot4 with resource_management + webui
 
+## Overview
+
+- [High Level Diagram](#high-level-diagram)
+- [Setup](#setup)
+    - [Turtlebot4 Setup](#turtlebot4-setup)
+        - [tb4_status](#tb4_status)
+        - [my_tb4_nav](#my_tb4_nav)
+        - [tb4_status_interface](#tb4_status_interface)
+    - [Local Workstation setup](#local-workstation-setup)
+        - [tb_fleet_server](#tb_fleet_server)
+- [Launching the programs](#launching-the-programs)
+    - [For Turtlebot4](#for-turtlebot4)
+    - [For local workstation](#for-local-workstation)
+    - [Summary of Launch Sequence](#summary-of-launch-sequence)
+- [Linking with resource_management and webui](#linking-with-resource_management-and-webui)
+- [Common Issues](#common-issues)
+
+
 There are 4 packages that need to be "installed" in order to use the Turtlebot4's with `resource_management` and `webui`.
 This has only been tested with ROS2 Humble and Ubuntu 22.04 LTS.
 
@@ -260,8 +278,6 @@ Do update the above list if there are any new branches that are configured to wo
 ---
 
 ## Common Issues
-
-### Turtlebot4 Issues
 
 1. Mapping/Navigation Issues
     - __Getting an error/warning telling you to stop mapping due to queue limits/buffer limits__
